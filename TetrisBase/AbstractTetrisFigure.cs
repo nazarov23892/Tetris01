@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace TetrisBase
 {
@@ -15,7 +16,7 @@ namespace TetrisBase
         protected Angle angle = Angle.Angle_0;
         protected int _X = 0;
         protected int _Y = 0;
-        protected System.Collections.Generic.List<TetrisPoint> points2 = new System.Collections.Generic.List<TetrisPoint>();
+        protected List<TetrisPoint> points2 = new List<TetrisPoint>();
 
         public int X
         {
@@ -79,7 +80,7 @@ namespace TetrisBase
 
         public abstract AbstractTetrisFigure CreateCopy();
 
-        protected void AssignPointList(System.Collections.Generic.List<TetrisPoint> sourceList)
+        protected void AssignPointList(List<TetrisPoint> sourceList)
         {
             this.points2.Clear();
             foreach (TetrisPoint point in sourceList)
