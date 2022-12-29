@@ -8,15 +8,15 @@ namespace TetrisBase
 {
     class OTetrisFigure : AbstractTetrisFigure
     {
-        private readonly List<TetrisPoint> TemplatePoints = new List<TetrisPoint>();
-
         public OTetrisFigure(int X, int Y)
         {
-            TemplatePoints.Add(new TetrisPoint(0, 0, TetrisColor.Green));
-            TemplatePoints.Add(new TetrisPoint(1, 0, TetrisColor.Red));
-            TemplatePoints.Add(new TetrisPoint(0, 1, TetrisColor.Yellow));
-            TemplatePoints.Add(new TetrisPoint(1, 1, TetrisColor.None));
-            this.AssignPointList(TemplatePoints);
+            this.points2 = new List<TetrisPoint>
+            {
+                new TetrisPoint(0, 0, TetrisColor.Green),
+                new TetrisPoint(1, 0, TetrisColor.Red),
+                new TetrisPoint(0, 1, TetrisColor.Yellow),
+                new TetrisPoint(1, 1, TetrisColor.None)
+            };
             this.X = X;
             this.Y = Y;
         }

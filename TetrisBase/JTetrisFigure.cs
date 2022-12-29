@@ -19,8 +19,7 @@ namespace TetrisBase
             };
             this.X = X;
             this.Y = Y;
-            }
-        
+        }
 
         public override AbstractTetrisFigure CreateCopy()
         {

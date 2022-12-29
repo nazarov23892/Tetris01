@@ -9,18 +9,15 @@ namespace TetrisBase
 {
     class LineTetrisFigure : AbstractTetrisFigure
     {
-        private readonly List<TetrisPoint> TemplatePoints = new List<TetrisPoint>();
-
         public LineTetrisFigure(int X, int Y)
         {
-            TemplatePoints.Add(new TetrisPoint(1, 0, TetrisColor.Yellow));
-            TemplatePoints.Add(new TetrisPoint(1, 1, TetrisColor.Red));
-            TemplatePoints.Add(new TetrisPoint(1, 2, TetrisColor.None));
-            TemplatePoints.Add(new TetrisPoint(1, 3, TetrisColor.Yellow));
-
-            this.points2.Clear();
-            this.AssignPointList(TemplatePoints);
-
+            this.points2 = new List<TetrisPoint>
+            {
+                new TetrisPoint(1, 0, TetrisColor.Yellow),
+                new TetrisPoint(1, 1, TetrisColor.Red),
+                new TetrisPoint(1, 2, TetrisColor.None),
+                new TetrisPoint(1, 3, TetrisColor.Yellow)
+            };
             this.X = X;
             this.Y = Y;
         }

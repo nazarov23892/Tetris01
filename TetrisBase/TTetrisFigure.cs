@@ -13,13 +13,13 @@ namespace TetrisBase
 
         public TTetrisFigure(int X, int Y)
         {
-            TemplatePoints.Add(new TetrisPoint(0, 1, TetrisColor.None));
-            TemplatePoints.Add(new TetrisPoint(1, 1, TetrisColor.Red));
-            TemplatePoints.Add(new TetrisPoint(2, 1, TetrisColor.None));
-            TemplatePoints.Add(new TetrisPoint(1, 0, TetrisColor.None));
-
-            this.AssignPointList(TemplatePoints);
-
+            this.points2 = new List<TetrisPoint>
+            {
+                new TetrisPoint(0, 1, TetrisColor.None),
+                new TetrisPoint(1, 1, TetrisColor.Red),
+                new TetrisPoint(2, 1, TetrisColor.None),
+                new TetrisPoint(1, 0, TetrisColor.None)
+            };
             this.X = X;
             this.Y = Y;
         }
