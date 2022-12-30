@@ -32,7 +32,7 @@ namespace Tetris01
             winformDrawer1.BackColor = this.BackColor;
 
             ITetrisLevelSet levelSet = new TetrisLevelSet();
-            ITetrisFigureCreator figureCreator = new TetrisFigureCreator();
+            ITetrisFigureCreator figureCreator = new TetrisFigureCreator_v2();
             ITetrisBrickModel model = new TetrisBrickModel(TETRIS_CUP_WIDTH, TETRIS_CUP_HEIGHT, figureCreator);
             tetrisView = new TetrisView(model, tetrisGame, winformDrawer1);
 

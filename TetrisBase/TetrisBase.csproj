@@ -59,7 +59,7 @@
     <Compile Include="TetrisBrickModel.cs" />
     <Compile Include="TetrisCup.cs" />
     <Compile Include="AbstractTetrisFigure.cs" />
-    <Compile Include="TetrisFigureCreator.cs" />
+    <Compile Include="TetrisFigureCreator_v2.cs" />
     <Compile Include="TetrisGame.cs" />
     <Compile Include="TetrisLevel.cs" />
     <Compile Include="TetrisLevelSet.cs" />
