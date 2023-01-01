@@ -9,27 +9,89 @@ namespace TetrisBase
     public class TetrisFigureCreator_v2 : ITetrisFigureCreator
     {
         private System.Random randomGen = new System.Random();
-        private Type[] types = new Type[]
+        private IFigureCreator[] creators = new IFigureCreator[]
         {
-            typeof(TTetrisFigure),
-            typeof(LTetrisFigure),
-            typeof(LineTetrisFigure),
-            typeof(JTetrisFigure),
-            typeof(STetrisFigure),
-            typeof(ZTetrisFigure),
-            typeof(OTetrisFigure)
+            new TFigureCreator(),
+            new LineFigureCreator(),
+            new LFigureCreator(),
+            new JFigureCreator(),
+            new SFigureCreator(),
+            new ZFigureCreator(),
+            new OFigureCreator()
         };
 
         public AbstractTetrisFigure Create()
         {
-            if (types.Length == 0)
+            if (creators.Length==0)
             {
                 return null;
             }
-            int randomIndex = randomGen.Next(types.Length);
-            Type type = types[randomIndex];
-            AbstractTetrisFigure figure = (AbstractTetrisFigure)Activator.CreateInstance(type, 0, 0);
+            int randomIndex = randomGen.Next(creators.Length);
+            IFigureCreator creator = creators[randomIndex];
+            AbstractTetrisFigure figure = creator.CreateFigure();
             return figure;
         }
     }
+
+    interface IFigureCreator
+    {
+        AbstractTetrisFigure CreateFigure();
+    }
+
+    class TFigureCreator : IFigureCreator
+    {
+        public AbstractTetrisFigure CreateFigure()
+        {
+            return new TTetrisFigure(0, 0);
+        }
+    }
+
+    class LineFigureCreator : IFigureCreator
+    {
+        public AbstractTetrisFigure CreateFigure()
+        {
+            return new LineTetrisFigure(0, 0);
+        }
+    }
+
+    class LFigureCreator : IFigureCreator
+    {
+        public AbstractTetrisFigure CreateFigure()
+        {
+            return new LTetrisFigure(0, 0);
+        }
+    }
+
+    class JFigureCreator : IFigureCreator
+    {
+        public AbstractTetrisFigure CreateFigure()
+        {
+            return new JTetrisFigure(0, 0);
+        }
+    }
+
+    class SFigureCreator : IFigureCreator
+    {
+        public AbstractTetrisFigure CreateFigure()
+        {
+            return new STetrisFigure(0, 0);
+        }
+    }
+
+    class ZFigureCreator : IFigureCreator
+    {
+        public AbstractTetrisFigure CreateFigure()
+        {
+            return new ZTetrisFigure(0, 0);
+        }
+    }
+
+    class OFigureCreator : IFigureCreator
+    {
+        public AbstractTetrisFigure CreateFigure()
+        {
+            return new OTetrisFigure(0, 0);
+        }
+    }
+
 }
