@@ -54,8 +54,8 @@ namespace TetrisBase
                     return;
                 }
                 this.brickModel = value;
-                this.brickModel.CupOverflow += TetrisController_CupOverflow;
-                this.brickModel.FilledRowsAfterExplose += TetrisController_FilledRowsAfterExplose;
+                //this.brickModel.CupOverflow += TetrisController_CupOverflow;
+                //this.brickModel.FilledRowsAfterExplose += TetrisController_FilledRowsAfterExplose;
             }
         }
 
@@ -199,30 +199,30 @@ namespace TetrisBase
             this.view.Redraw();
         }
 
-        private void TetrisController_FilledRowsAfterExplose(ITetrisBrickModel sender, int rowCount)
-        {
-            int reward = SCORE_REWARDS[rowCount];
-            this.score += reward;
+        //private void TetrisController_FilledRowsAfterExplose(ITetrisBrickModel sender, int rowCount)
+        //{
+        //    int reward = SCORE_REWARDS[rowCount];
+        //    this.score += reward;
 
-            if (this.score >= SCORE_LEVEL_END)
-            {
-                if (this.levelSet.IsEnd())
-                {
-                    this.SetStateWin();
-                    return;
-                }
-                this.NextLevel();
-                if (this.LevelCompleted != null)
-                {
-                    this.LevelCompleted(this);
-                }
-            }
-        }
+        //    if (this.score >= SCORE_LEVEL_END)
+        //    {
+        //        if (this.levelSet.IsEnd())
+        //        {
+        //            this.SetStateWin();
+        //            return;
+        //        }
+        //        this.NextLevel();
+        //        if (this.LevelCompleted != null)
+        //        {
+        //            this.LevelCompleted(this);
+        //        }
+        //    }
+        //}
 
-        private void TetrisController_CupOverflow(ITetrisBrickModel sender, TetrisCup cup)
-        {
-            this.SetStateGameover();
-        }
+        //private void TetrisController_CupOverflow(ITetrisBrickModel sender, TetrisCup cup)
+        //{
+        //    this.SetStateGameover();
+        //}
 
         private void TetrisTimer_Elapsed(ITetrisTimer sender)
         {

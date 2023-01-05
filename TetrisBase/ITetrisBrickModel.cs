@@ -13,18 +13,21 @@ namespace TetrisBase
 
     public interface ITetrisBrickModel
     {
-        event TetrisCupFilledRowsBeforeExploseEventHandler FilledRowsBeforeExplose;
-        event TetrisCupFilledRowsAfterExploseEventHandler FilledRowsAfterExplose;
-        event TetrisFigureEventHandler FigureRecreated;
-        event TetrisFigureEventHandler FigureChanged;
-        event TetrisCupEventHandler CupChanged;
-        event TetrisCupEventHandler CupOverflow;
+        //event TetrisCupFilledRowsBeforeExploseEventHandler FilledRowsBeforeExplose;
+        //event TetrisCupFilledRowsAfterExploseEventHandler FilledRowsAfterExplose;
+        //event TetrisFigureEventHandler FigureRecreated;
+        //event TetrisFigureEventHandler FigureChanged;
+        //event TetrisCupEventHandler CupChanged;
+        //event TetrisCupEventHandler CupOverflow;
 
+        int[] FilledRows { get; }
+        bool IsCupOverflowed { get; }
         AbstractTetrisFigure Figure { get; }
         AbstractTetrisFigure NextFigure { get; }
         AbstractTetrisFigure PlaneFigure { get; }
         TetrisCup Cup { get; }
 
+        int ExploseFilledRows();
         bool MoveLeft();
         bool MoveRight();
         bool MoveUp();

@@ -7,8 +7,7 @@ using TetrisBase;
 
 namespace TetrisBase
 {
-    
-    public class TetrisBrickModel: ITetrisBrickModel
+    public class TetrisBrickModel : ITetrisBrickModel
     {
         private readonly TetrisCup cup = null;
         private TetrisCup cupCopy = null;
@@ -19,12 +18,12 @@ namespace TetrisBase
 
         public AbstractTetrisFigure Figure
         {
-            get => this.figure; 
+            get => this.figure;
         }
 
         public TetrisCup Cup
         {
-            get => this.cupCopy; 
+            get => this.cupCopy;
         }
 
         public AbstractTetrisFigure NextFigure
@@ -37,12 +36,24 @@ namespace TetrisBase
             get => this.planeFigure;
         }
 
-        public event TetrisCupFilledRowsBeforeExploseEventHandler FilledRowsBeforeExplose;
-        public event TetrisCupFilledRowsAfterExploseEventHandler FilledRowsAfterExplose;
-        public event TetrisFigureEventHandler FigureRecreated;
-        public event TetrisFigureEventHandler FigureChanged;
-        public event TetrisCupEventHandler CupChanged;
-        public event TetrisCupEventHandler CupOverflow;
+        public int[] FilledRows 
+        {
+            get
+            {
+                List<int> rowIndexes = new List<int>();
+                for (int i = cup.Height - 1; i >= 0; i--)
+                {
+                    if (this.cup.IsFilledRow(i))
+                    {
+                        rowIndexes.Add(i);
+                    }
+                }
+                return rowIndexes.ToArray();
+            }
+        }
+
+        public bool IsCupOverflowed => this.Cup.CheckOverflow();
+
         public TetrisBrickModel(int CupWidth, int CupHeight, ITetrisFigureCreator figureCreator)
         {
             this.cup = new TetrisCup(CupWidth, CupHeight);
@@ -60,7 +71,6 @@ namespace TetrisBase
                 this.figure.X += 1;
                 return false;
             }
-            this.CallFigureChanged();
             this.UpdatePlaneFigure();
             return true;
         }
@@ -73,7 +83,6 @@ namespace TetrisBase
                 this.figure.X -= 1;
                 return false;
             }
-            this.CallFigureChanged();
             this.UpdatePlaneFigure();
             return true;
         }
@@ -81,7 +90,6 @@ namespace TetrisBase
         public bool MoveUp()
         {
             this.figure.Y += 1;
-            this.CallFigureChanged();
             this.UpdatePlaneFigure();
             return true;
         }
@@ -94,11 +102,9 @@ namespace TetrisBase
                 this.figure.Y += 1;
                 this.PutFigureToCup();
                 this.AssignNextFigure();
-                this.ExploseFilledRows();
                 return false;
             }
             this.UpdatePlaneFigure();
-            this.CallFigureChanged();
             return true;
         }
 
@@ -110,7 +116,6 @@ namespace TetrisBase
                 this.figure.RotateBack();
                 return false;
             }
-            this.CallFigureChanged();
             this.UpdatePlaneFigure();
             return true;
         }
@@ -133,7 +138,6 @@ namespace TetrisBase
 
             this.figure = figure;
             this.UpdatePlaneFigure();
-            this.CallFigureRecreated();
         }
 
         public void AssignCupPoints(List<TetrisPoint> points)
@@ -144,7 +148,6 @@ namespace TetrisBase
                 this.cup.AddPoint(point);
             }
             this.UpdateCupCopy();
-            this.CallCupChanged();
         }
 
         public void Reset()
@@ -160,11 +163,6 @@ namespace TetrisBase
                 this.cup.AddPoint(point.X, point.Y, point.Color);
             }
             UpdateCupCopy();
-            this.CallCupChanged();
-            if (this.cup.CheckOverflow())
-            {
-                this.CallCupOverflow();
-            }
         }
 
         private bool CheckIntersection(AbstractTetrisFigure figure1)
@@ -193,80 +191,6 @@ namespace TetrisBase
             return false;
         }
 
-        private void ExploseFilledRows()
-        {
-            List<int> rowIndexes = new List<int>();
-            for (int i = cup.Height - 1; i >= 0; i--)
-            {
-                if (this.cup.IsFilledRow(i))
-                {
-                    rowIndexes.Add(i);
-                }
-            }
-            if (rowIndexes.Count == 0)
-            {
-                return;
-            }
-            this.CallFilledRowsBeforeExplose(rowIndexes);
-            int counter = 0;
-            foreach (int index in rowIndexes)
-            {
-                this.cup.DeleteRow(index);
-                counter++;
-            }
-            this.UpdateCupCopy();
-            this.CallFilledRowsAfterExplose(counter);
-            return;
-        }
-
-        private void CallFigureChanged()
-        {
-            if (this.FigureChanged != null)
-            {
-                this.FigureChanged(this, this.figure);
-            }
-        }
-
-        private void CallCupChanged()
-        {
-            if (this.CupChanged != null)
-            {
-                this.CupChanged(this, this.cup);
-            }
-        }
-
-        private void CallCupOverflow()
-        {
-            if (this.CupOverflow != null)
-            {
-                this.CupOverflow(this, this.cup);
-            }
-        }
-
-        private void CallFilledRowsBeforeExplose(IEnumerable<int> rowIndexes)
-        {
-            if (FilledRowsBeforeExplose != null)
-            {
-                this.FilledRowsBeforeExplose(this, rowIndexes);
-            }
-        }
-
-        private void CallFilledRowsAfterExplose(int counter)
-        {
-            if (this.FilledRowsAfterExplose != null)
-            {
-                this.FilledRowsAfterExplose(this, counter);
-            }
-        }
-
-        private void CallFigureRecreated()
-        {
-            if (this.FigureRecreated != null)
-            {
-                this.FigureRecreated(this, this.figure);
-            }
-        }
-
         private void UpdateCupCopy()
         {
             this.cupCopy = new TetrisCup(this.cup);
@@ -291,6 +215,23 @@ namespace TetrisBase
                 }
                 iter += 1;
             }
+        }
+
+        int ITetrisBrickModel.ExploseFilledRows()
+        {
+            int[] rowIndexes = this.FilledRows;
+            if (rowIndexes.Length == 0)
+            {
+                return 0;
+            }
+            int counter = 0;
+            foreach (int index in rowIndexes)
+            {
+                this.cup.DeleteRow(index);
+                counter++;
+            }
+            this.UpdateCupCopy();
+            return counter;
         }
     }
 }
