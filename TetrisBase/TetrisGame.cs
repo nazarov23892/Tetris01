@@ -101,6 +101,11 @@ namespace TetrisBase
                 return;
             }
             this.brickModel.MoveDown();
+            ExploseFilledRows();
+            if (brickModel.IsCupOverflowed)
+            {
+                this.SetStateGameover();
+            }
             this.view.Redraw();
         }
 
@@ -219,10 +224,35 @@ namespace TetrisBase
         //    }
         //}
 
-        //private void TetrisController_CupOverflow(ITetrisBrickModel sender, TetrisCup cup)
-        //{
-        //    this.SetStateGameover();
-        //}
+        private void ExploseFilledRows()
+        {
+            int explosedRowCount = this.brickModel.ExploseFilledRows();
+            if (explosedRowCount == 0)
+            {
+                return;
+            }
+            int reward = SCORE_REWARDS[explosedRowCount];
+            this.score += reward;
+
+            if (IsLevelCompleted())
+            {
+                if (this.levelSet.IsEnd())
+                {
+                    this.SetStateWin();
+                    return;
+                }
+                this.NextLevel();
+                if (this.LevelCompleted != null)
+                {
+                    this.LevelCompleted(this);
+                }
+            }
+        }
+
+        private bool IsLevelCompleted()
+        {
+            return this.score >= SCORE_LEVEL_END;
+        }
 
         private void TetrisTimer_Elapsed(ITetrisTimer sender)
         {
