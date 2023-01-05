@@ -42,9 +42,10 @@ namespace Tetris01
             // 
             this.ui_button_OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ui_button_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.ui_button_OK.Location = new System.Drawing.Point(168, 94);
+            this.ui_button_OK.Location = new System.Drawing.Point(252, 145);
+            this.ui_button_OK.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ui_button_OK.Name = "ui_button_OK";
-            this.ui_button_OK.Size = new System.Drawing.Size(60, 23);
+            this.ui_button_OK.Size = new System.Drawing.Size(90, 35);
             this.ui_button_OK.TabIndex = 0;
             this.ui_button_OK.Text = "OK";
             this.ui_button_OK.UseVisualStyleBackColor = true;
@@ -52,36 +53,40 @@ namespace Tetris01
             // ui_label_02
             // 
             this.ui_label_02.AutoSize = true;
-            this.ui_label_02.Location = new System.Drawing.Point(12, 40);
+            this.ui_label_02.Location = new System.Drawing.Point(18, 62);
+            this.ui_label_02.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ui_label_02.Name = "ui_label_02";
-            this.ui_label_02.Size = new System.Drawing.Size(83, 13);
+            this.ui_label_02.Size = new System.Drawing.Size(119, 20);
             this.ui_label_02.TabIndex = 1;
             this.ui_label_02.Text = "Nazarov Mikhail";
             // 
             // ui_label_01
             // 
             this.ui_label_01.AutoSize = true;
-            this.ui_label_01.Location = new System.Drawing.Point(12, 9);
+            this.ui_label_01.Location = new System.Drawing.Point(18, 14);
+            this.ui_label_01.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ui_label_01.Name = "ui_label_01";
-            this.ui_label_01.Size = new System.Drawing.Size(77, 13);
+            this.ui_label_01.Size = new System.Drawing.Size(114, 20);
             this.ui_label_01.TabIndex = 2;
             this.ui_label_01.Text = "TETRIS Game";
             // 
             // ui_label_03
             // 
             this.ui_label_03.AutoSize = true;
-            this.ui_label_03.Location = new System.Drawing.Point(12, 53);
+            this.ui_label_03.Location = new System.Drawing.Point(18, 82);
+            this.ui_label_03.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ui_label_03.Name = "ui_label_03";
-            this.ui_label_03.Size = new System.Drawing.Size(31, 13);
+            this.ui_label_03.Size = new System.Drawing.Size(45, 20);
             this.ui_label_03.TabIndex = 3;
-            this.ui_label_03.Text = "2022";
+            this.ui_label_03.Text = "2023";
             // 
             // ui_linkLabel_Mail
             // 
             this.ui_linkLabel_Mail.AutoSize = true;
-            this.ui_linkLabel_Mail.Location = new System.Drawing.Point(12, 80);
+            this.ui_linkLabel_Mail.Location = new System.Drawing.Point(18, 123);
+            this.ui_linkLabel_Mail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ui_linkLabel_Mail.Name = "ui_linkLabel_Mail";
-            this.ui_linkLabel_Mail.Size = new System.Drawing.Size(133, 13);
+            this.ui_linkLabel_Mail.Size = new System.Drawing.Size(197, 20);
             this.ui_linkLabel_Mail.TabIndex = 4;
             this.ui_linkLabel_Mail.TabStop = true;
             this.ui_linkLabel_Mail.Text = "nazarov23892@gmail.com";
@@ -90,9 +95,9 @@ namespace Tetris01
             // 
             // AboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 129);
+            this.ClientSize = new System.Drawing.Size(360, 198);
             this.Controls.Add(this.ui_linkLabel_Mail);
             this.Controls.Add(this.ui_label_03);
             this.Controls.Add(this.ui_label_01);
@@ -100,6 +105,7 @@ namespace Tetris01
             this.Controls.Add(this.ui_button_OK);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About..";
