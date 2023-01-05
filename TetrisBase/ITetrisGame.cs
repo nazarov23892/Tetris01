@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace TetrisBase
 {
-    public delegate void TetrisGameDelegate(TetrisGame sender);
-
     public interface ITetrisGame
     {
         ITetrisBrickModel BrickModel { get; set; }

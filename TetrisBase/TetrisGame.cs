@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace TetrisBase
 {
-
     public class TetrisGame: ITetrisGame
     {
         private const int SCORE_LEVEL_END = /*10 **/ 1000;
