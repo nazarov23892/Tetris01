@@ -9,11 +9,7 @@ namespace TetrisBase
 
     public class TetrisGame: ITetrisGame
     {
-        public event TetrisGameDelegate LevelCompleted;
-        public event TetrisGameDelegate Win;
-        public event TetrisGameDelegate GameOver;
-
-        private const int SCORE_LEVEL_END = 10 * 1000;
+        private const int SCORE_LEVEL_END = /*10 **/ 1000;
         private readonly Dictionary<int, int> SCORE_REWARDS = new Dictionary<int, int>()
         {
             {1, 100 },
@@ -54,8 +50,6 @@ namespace TetrisBase
                     return;
                 }
                 this.brickModel = value;
-                //this.brickModel.CupOverflow += TetrisController_CupOverflow;
-                //this.brickModel.FilledRowsAfterExplose += TetrisController_FilledRowsAfterExplose;
             }
         }
 
@@ -186,10 +180,6 @@ namespace TetrisBase
         {
             this.state = TetrisGameState.Win;
             this.timer.Stop();
-            if (this.Win != null)
-            {
-                this.Win(this);
-            }
             this.view.Redraw();
         }
 
@@ -197,32 +187,8 @@ namespace TetrisBase
         {
             this.state = TetrisGameState.GameOver;
             this.timer.Stop();
-            if (this.GameOver != null)
-            {
-                this.GameOver(this);  
-            }
             this.view.Redraw();
         }
-
-        //private void TetrisController_FilledRowsAfterExplose(ITetrisBrickModel sender, int rowCount)
-        //{
-        //    int reward = SCORE_REWARDS[rowCount];
-        //    this.score += reward;
-
-        //    if (this.score >= SCORE_LEVEL_END)
-        //    {
-        //        if (this.levelSet.IsEnd())
-        //        {
-        //            this.SetStateWin();
-        //            return;
-        //        }
-        //        this.NextLevel();
-        //        if (this.LevelCompleted != null)
-        //        {
-        //            this.LevelCompleted(this);
-        //        }
-        //    }
-        //}
 
         private void ExploseFilledRows()
         {
@@ -242,10 +208,6 @@ namespace TetrisBase
                     return;
                 }
                 this.NextLevel();
-                if (this.LevelCompleted != null)
-                {
-                    this.LevelCompleted(this);
-                }
             }
         }
 

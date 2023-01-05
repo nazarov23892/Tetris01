@@ -10,10 +10,6 @@ namespace TetrisBase
 
     public interface ITetrisGame
     {
-        event TetrisGameDelegate LevelCompleted;
-        event TetrisGameDelegate Win;
-        event TetrisGameDelegate GameOver;
-
         ITetrisBrickModel BrickModel { get; set; }
         ITetrisView View { get; set; }
         ITetrisLevelSet LevelSet { get; set; }
