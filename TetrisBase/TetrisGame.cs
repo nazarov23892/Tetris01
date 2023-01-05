@@ -8,7 +8,7 @@ namespace TetrisBase
 {
     public class TetrisGame: ITetrisGame
     {
-        private const int SCORE_LEVEL_END = /*10 **/ 1000;
+        private const int SCORE_LEVEL_END = 10 * 1000;
         private readonly Dictionary<int, int> SCORE_REWARDS = new Dictionary<int, int>()
         {
             {1, 100 },
